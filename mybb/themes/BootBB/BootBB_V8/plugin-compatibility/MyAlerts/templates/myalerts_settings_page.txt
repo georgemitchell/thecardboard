@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>{$lang->myalerts_settings_page_title} - {$mybb->settings['bbname']}</title>
+	{$headerinclude}
+	</head>
+<body>
+	{$header}
+
+	{$usercpnav}
+	<div class="col-sm-10">
+		<div class="tborder">
+			<div class="thead"><strong>{$lang->myalerts_settings_page_title}</strong></div>
+			
+			<form action="alerts.php?action=settings" method="post">
+                <input type="hidden" name="my_post_key" value="{$mybb->post_code}"/>
+				<table width="100%" border="0" align="center">
+					<tbody id="latestAlertsListing">
+						{$alertSettings}
+					</tbody>
+				</table> 
+				<div style="text-align:center;">
+                    <input type="submit" value="{$lang->myalerts_settings_save}" class="button"/>
+                </div>
+            </form>
+			
+		</div>
+	</div>
+	{$footer}
+</body>
+</html>

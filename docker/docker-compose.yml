@@ -1,0 +1,38 @@
+services:
+  mybb:
+    build:
+      context: ./mybb
+    environment:
+        XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
+    volumes:
+      - ../mybb/1.8.24/Upload:/var/www/html
+      - ../../mybb_predictions/Upload:/var/www/predictions
+      - ./mybb/logs:/var/log
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ../mybb/1.8.24/Upload:/var/www/html:ro
+      - ../../mybb_predictions/Upload:/var/www/predictions:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    depends_on: 
+      - mybb
+    ports:
+      - "8000:80"
+      - "8001:443"
+
+  db:
+    image: mysql:5.6
+    volumes:
+      - ./mysql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: changeme
+       MYSQL_DATABASE: cardbd_mybb
+       MYSQL_USER: cardbd_2
+       MYSQL_PASSWORD: changeme
+
+version: '3.7'

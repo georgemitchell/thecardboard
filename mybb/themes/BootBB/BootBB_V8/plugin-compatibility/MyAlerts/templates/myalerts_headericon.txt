@@ -1,0 +1,16 @@
+<a href="{$mybb->settings['bburl']}/alerts.php" class="myalerts register btn btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="{$lang->myalerts_alerts}" onclick="MyBB.popupWindow('/alerts.php?modal=1&amp;ret_link={$myalerts_return_link}', { fadeDuration: 250, zIndex: (typeof modal_zindex !== 'undefined' ? modal_zindex : 9999) }); return false;"><i class="fa fa-bell"></i><span class="hidden-xs"> {$lang->myalerts_alerts}</span> ({$mybb->user['unreadAlerts']})</a>
+
+<script type="text/javascript">
+	var alerts = $("a.myalerts");
+	if(alerts.length)
+	{
+		//alerts.addClass("register btn btn-xs btn-warning");
+		var regex = /\(0\)$/;
+	
+		if (alerts.text().match(regex))
+			alerts.css("color", "#fff");
+		else
+			alerts.css("color", "#CF3838");
+		//alerts.parent("li.alerts").replaceWith(alerts);
+	}
+</script>

@@ -1,0 +1,1 @@
+../../../../../predictions/inc/languages/english/admin/predictions.lang.php
